@@ -14,6 +14,8 @@ const traficController = {
           infosTrafic: infosTrafic.map((info) => ({
             _id: info._id.toString(),
             localisation: info.localisation,
+            destination: info.destination,
+            route: info.route,
             etat: info.etat,
           })),
         },
@@ -43,6 +45,8 @@ const traficController = {
           infoTrafic: {
             _id: infoTrafic._id.toString(),
             localisation: infoTrafic.localisation,
+            destination: infoTrafic.destination,
+            route: infoTrafic.route,
             etat: infoTrafic.etat,
           },
         },
@@ -76,6 +80,8 @@ const traficController = {
           updatedInfoTrafic: {
             _id: updatedInfoTrafic._id.toString(),
             localisation: updatedInfoTrafic.localisation,
+            destination: updatedInfoTrafic.destination,
+            route: updatedInfoTrafic.route,
             etat: updatedInfoTrafic.etat,
             // Add other properties as needed
           },
@@ -89,9 +95,14 @@ const traficController = {
   createInfoTrafic: async function (args) {
     console.log("SOAP Request Args:", args);
 
-    const { localisation, etat } = args; // Retrieve parameters from SOAP request args
+    const { localisation, destination, route, etat } = args; // Retrieve parameters from SOAP request args
 
-    const newInfoTrafic = new InfoTrafic({ localisation, etat });
+    const newInfoTrafic = new InfoTrafic({
+      localisation,
+      destination,
+      route,
+      etat,
+    });
 
     try {
       const savedInfoTrafic = await newInfoTrafic.save();
@@ -103,6 +114,8 @@ const traficController = {
           infoTrafic: {
             _id: savedInfoTrafic._id.toString(),
             localisation: savedInfoTrafic.localisation,
+            destination: savedInfoTrafic.destination,
+            route: savedInfoTrafic.route,
             etat: savedInfoTrafic.etat,
           },
         },
@@ -145,12 +158,13 @@ const traficController = {
   searchInfoTraficByLocation: async function (args) {
     console.log("SOAP Request Args:", args);
 
-    const { location } = args; // Retrieve location parameter from SOAP request args
+    const { location, destination } = args; // Retrieve location parameter from SOAP request args
 
     try {
       // Assume there is a method in your model or another way to search by location
       const infoTraficByLocation = await InfoTrafic.find({
         localisation: location,
+        destination: destination,
       });
 
       // Ensure that 'res' is defined and has the 'json' method before using it
@@ -159,6 +173,8 @@ const traficController = {
           infoTrafic: infoTraficByLocation.map((info) => ({
             _id: info._id.toString(),
             localisation: info.localisation,
+            destination: info.destination,
+            route: info.route,
             etat: info.etat,
           })),
         },
