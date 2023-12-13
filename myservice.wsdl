@@ -1,0 +1,111 @@
+<definitions
+    name="MyService"
+    targetNamespace="http://example.com/"
+    xmlns:tns="http://example.com/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <xsd:schema targetNamespace="http://example.com/">
+            <!-- Define your data types here -->
+            <xsd:element name="InfoTrafic">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string"/>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <!-- Add other fields as needed -->
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="GetAllInfosTraficRequest"/>
+
+    <message name="GetAllInfosTraficResponse">
+        <part name="result" type="tns:InfoTrafic"/>
+    </message>
+
+    <message name="GetInfoTraficByIdRequest">
+        <part name="id" type="xsd:string"/>
+    </message>
+
+    <message name="GetInfoTraficByIdResponse">
+        <part name="result" type="tns:InfoTrafic"/>
+    </message>
+
+    <message name="CreateInfoTraficRequest">
+        <part name="infoTrafic" type="tns:InfoTrafic"/>
+    </message>
+
+    <message name="CreateInfoTraficResponse">
+        <part name="result" type="tns:InfoTrafic"/>
+    </message>
+
+    <message name="UpdateInfoTraficRequest">
+        <part name="id" type="xsd:string"/>
+        <part name="infoTrafic" type="tns:InfoTrafic"/>
+    </message>
+
+    <message name="UpdateInfoTraficResponse">
+        <part name="result" type="tns:InfoTrafic"/>
+    </message>
+
+    <message name="DeleteInfoTraficRequest">
+        <part name="id" type="xsd:string"/>
+    </message>
+
+    <message name="DeleteInfoTraficResponse"/>
+
+    <portType name="MyPortType">
+        <operation name="GetAllInfosTrafic">
+            <input message="tns:GetAllInfosTraficRequest"/>
+            <output message="tns:GetAllInfosTraficResponse"/>
+        </operation>
+
+        <operation name="GetInfoTraficById">
+            <input message="tns:GetInfoTraficByIdRequest"/>
+            <output message="tns:GetInfoTraficByIdResponse"/>
+        </operation>
+
+        <operation name="CreateInfoTrafic">
+            <input message="tns:CreateInfoTraficRequest"/>
+            <output message="tns:CreateInfoTraficResponse"/>
+        </operation>
+
+        <operation name="UpdateInfoTrafic">
+            <input message="tns:UpdateInfoTraficRequest"/>
+            <output message="tns:UpdateInfoTraficResponse"/>
+        </operation>
+
+        <operation name="DeleteInfoTrafic">
+            <input message="tns:DeleteInfoTraficRequest"/>
+            <output message="tns:DeleteInfoTraficResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="MyBinding" type="tns:MyPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+        <operation name="GetAllInfosTrafic">
+            <soap:operation soapAction="http://example.com/GetAllInfosTrafic"/>
+            <input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:examples:my" use="encoded"/>
+            </input>
+            <output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:examples:my" use="encoded"/>
+            </output>
+        </operation>
+
+        <!-- Add similar sections for other operations -->
+    </binding>
+
+    <service name="MyService">
+        <port binding="tns:MyBinding" name="MyPort">
+            <soap:address location="http://localhost:8000/soap-endpoint"/>
+        </port>
+    </service>
+</definitions>
