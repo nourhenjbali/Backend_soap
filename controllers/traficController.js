@@ -159,13 +159,16 @@ const traficController = {
     console.log("SOAP Request Args:", args);
 
     const { location, destination } = args; // Retrieve location parameter from SOAP request args
+    console.log("voila localisation", location);
+    console.log("voila destination", destination);
 
     try {
       // Assume there is a method in your model or another way to search by location
       const infoTraficByLocation = await InfoTrafic.find({
-        localisation: location,
-        destination: destination,
+        localisation: location.trim(),
+        destination: destination.trim(),
       });
+      console.log("here the infotrafic trouvé", infoTraficByLocation);
 
       // Ensure that 'res' is defined and has the 'json' method before using it
       const soapResponseBody = {

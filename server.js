@@ -24,7 +24,7 @@ connect();
 
 // Use the SOAP routes defined in soapRoutes.js
 app.use("/soap-endpoint", soapRoutes);
-// REST SERVICE 
+// REST SERVICE
 app.use("/commentaires", commentairesRoutes);
 app.use("/utilisateurs", utilisateursRoutes);
 // Body parser middleware
@@ -64,6 +64,15 @@ const myService = {
       },
       DeleteInfoTrafic: async function (args) {
         return await traficController.deleteInfoTrafic(args.id);
+      },
+      SearchInfoTraficByLocation: async function (args) {
+        try {
+          console.log("we are here in SearchInfoTraficByLocation");
+          return await traficController.searchInfoTraficByLocation(args);
+        } catch (error) {
+          console.error("Error in SearchInfoTraficByLocation:", error);
+          throw error;
+        }
       },
     },
   },

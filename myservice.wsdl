@@ -14,11 +14,13 @@
             <xsd:element name="InfoTrafic">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="id" type="xsd:string"/>
-                        <xsd:element name="name" type="xsd:string"/>
-                        <!-- Add other fields as needed -->
+                        <xsd:element name="localisation" type="xsd:string"/>
+                        <xsd:element name="destination" type="xsd:string"/>
+                        <xsd:element name="route" type="xsd:string"/>
+                        <xsd:element name="etat" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
+
             </xsd:element>
         </xsd:schema>
     </types>
@@ -49,7 +51,11 @@
         <part name="id" type="xsd:string"/>
         <part name="infoTrafic" type="tns:InfoTrafic"/>
     </message>
-
+    <operation name="SearchInfoTraficByLocation">
+        <input message="tns:SearchInfoTraficByLocationRequest"/>
+        <output message="tns:SearchInfoTraficByLocationResponse"/>
+    </operation>
+    
     <message name="UpdateInfoTraficResponse">
         <part name="result" type="tns:InfoTrafic"/>
     </message>

@@ -53,16 +53,20 @@ router.post("/deleteInfoTrafic", async (req, res) => {
   }
 });
 
-router.post("/searchInfoTraficByLocation/:location", async (req, res) => {
-  try {
-    const response = await traficController.searchInfoTraficByLocation(
-      req.params
-    );
-    res.header("Content-Type", "application/json");
-    res.send(response);
-  } catch (error) {
-    res.status(500).send(error.message);
+router.post(
+  "/searchInfoTraficByLocation/:location/:destination",
+  async (req, res) => {
+    try {
+      const response = await traficController.searchInfoTraficByLocation({
+        location: req.params.location,
+        destination: req.params.destination,
+      });
+      res.header("Content-Type", "application/json");
+      res.send(response);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
   }
-});
+);
 
 module.exports = router;
