@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const soapRoutes = require("./routes/soapRoutes"); // Adjust the path based on your project structure
+const accidentRoutes = require("./routes/accidentRoutes"); // Update the path accordingly
 
 const commentairesRoutes = require("./routes/commentairesRoutes");
 const utilisateursRoutes = require("./routes/utilisateursRoutes");
@@ -27,6 +28,8 @@ app.use("/soap-endpoint", soapRoutes);
 // REST SERVICE
 app.use("/commentaires", commentairesRoutes);
 app.use("/utilisateurs", utilisateursRoutes);
+// Use accident routes
+app.use("/", accidentRoutes);
 // Body parser middleware
 app.use(
   bodyParser.raw({
