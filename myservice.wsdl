@@ -10,7 +10,6 @@
 
     <types>
         <xsd:schema targetNamespace="http://example.com/">
-            <!-- Define your data types here -->
             <xsd:element name="InfoTrafic">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -106,7 +105,6 @@
             </output>
         </operation>
 
-        <!-- Add similar sections for other operations -->
     </binding>
 
     <service name="MyService">

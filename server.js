@@ -23,14 +23,10 @@ const connect = async () => {
 };
 connect();
 
-// Use the SOAP routes defined in soapRoutes.js
 app.use("/soap-endpoint", soapRoutes);
-// REST SERVICE
 app.use("/commentaires", commentairesRoutes);
 app.use("/utilisateurs", utilisateursRoutes);
-// Use accident routes
 app.use("/", accidentRoutes);
-// Body parser middleware
 app.use(
   bodyParser.raw({
     type: function () {
@@ -40,10 +36,8 @@ app.use(
   })
 );
 
-// MongoDB controller
 const traficController = require("./Controllers/TraficController");
 
-// Define your SOAP service
 const myService = {
   MyService: {
     MyPort: {
@@ -81,15 +75,12 @@ const myService = {
   },
 };
 
-// Read the WSDL file
 const xml = require("fs").readFileSync("myservice.wsdl", "utf8");
 
-// Create the SOAP server using Express
 soap.listen(app, "/soap-endpoint", myService, xml, function () {
   console.log("SOAP server initialized");
 });
 
-// Start the Express server
 const port = 8000;
 app.listen(port, function () {
   console.log(`Express server listening on port ${port}`);

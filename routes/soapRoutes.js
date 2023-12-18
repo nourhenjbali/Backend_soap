@@ -1,4 +1,3 @@
-// routes/soapRoutes.js
 const express = require("express");
 const router = express.Router();
 const traficController = require("../Controllers/TraficController");
